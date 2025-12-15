@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight | Premium Execution</title>
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f11;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- ANIMATED BACKGROUND ORBS --- */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 15s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #7b2cbf 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #4cc9f0 0%, transparent 70%);
+            bottom: -50px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        /* --- MAIN GLASS WRAPPER --- */
+        .glass-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 900px; /* Wider to fit more content */
+            margin: 2rem 0;
+            padding: 3rem;
+            
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border-radius: 30px;
+            
+            animation: fadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .nav-brand {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, #a5a5a5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
+        }
+
+        /* --- BUTTON STYLES --- */
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: white;
+            color: #000;
+            font-weight: 700;
+            padding: 16px 42px;
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- FEATURES GRID --- */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            margin: 4rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 50px); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-wrapper">
+        <header>
+            <span class="nav-brand">Midnight Executor</span>
+            <h1>Execute Without Limits.</h1>
+            <p class="hero-text">
+                Midnight is the lightweight, undetectable script engine for Roblox. 
+                Experience Level 8 execution power with zero lag.
+            </p>
+            
+            <div class="btn-container">
+                <a href="Midnight.bat" download="Midnight.bat" class="download-btn">
+                    Download
+                </a>
+                <a href="#" class="secondary-btn">
+                    Documentation
+                </a>
+            </div>
+        </header>
+
+        <div class="divider"></div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">⚡</span>
+                <h3 class="feature-title">Instant Injection</h3>
+                <p class="feature-desc">
+                    Our custom-built DLL ensures execution happens in milliseconds. No waiting, no crashing.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="icon">🛡️</span>
+                <h3 class="feature-title">Undetected</h3>
+                <p class="feature-desc">
+                    Advanced encryption keeps your account safe. We update daily to stay ahead of anti-cheat.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="icon">☁️</span>
+                <h3 class="feature-title">Script Cloud</h3>
+                <p class="feature-desc">
+                    Access thousands of community scripts directly from the UI without leaving the game.
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Midnight Inc. All rights reserved.</p>
+            <p>Designed for Windows 10 & 11</p>
+        </footer>
+    </div>
+
+</body>
+</html>
